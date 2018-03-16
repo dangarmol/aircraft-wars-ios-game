@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var backgroundImg: UIImageView!
     
-    var roadArray: [UIImage] = [UIImage(named: "road1.png")!,
+    var backgroundArray: [UIImage] = [UIImage(named: "road1.png")!,
                                 UIImage(named: "road2.png")!,
                                 UIImage(named: "road3.png")!,
                                 UIImage(named: "road4.png")!,
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     }
 
     func setAnimatedBackground() {
-        backgroundImg.image = UIImage.animatedImage(with: roadArray, duration: 0.5)
+        backgroundImg.image = UIImage.animatedImage(with: backgroundArray, duration: 0.5)
     }
     
     func displayMenu() {
