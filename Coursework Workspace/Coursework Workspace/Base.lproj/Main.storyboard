@@ -22,12 +22,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MiG-51.PNG" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-3a-PJD" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
+                                <rect key="frame" x="139" y="529" width="96" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="backgroundImg" destination="gLn-MN-k2k" id="zZ4-e4-jzE"/>
+                        <outlet property="planeImg" destination="2E4-3a-PJD" id="i7A-ew-vI5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -36,6 +41,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MiG-51.PNG" width="128" height="195"/>
         <image name="road1.png" width="433" height="914"/>
     </resources>
 </document>

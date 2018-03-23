@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var backgroundImg: UIImageView!
     
+    @IBOutlet weak var planeImg: UIImageView!
+    
     var backgroundArray: [UIImage] = [UIImage(named: "road1.png")!,
                                 UIImage(named: "road2.png")!,
                                 UIImage(named: "road3.png")!,
@@ -35,7 +37,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAnimatedBackground()
+        displayMenu() //To display the game menu.
+        loadGraphics()
+        startGame()
         displayMenu() //To display the game menu.
     }
 
@@ -44,8 +48,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func setAnimatedBackground() {
-        backgroundImg.image = UIImage.animatedImage(with: backgroundArray, duration: 0.5)
+    func loadGraphics(/*Plane image data should be here*/) {
+        setAnimatedBackground(dur: 0.5)
+        //planeImg.image.
+    }
+    
+    func startGame() {
+        
+    }
+    
+    func setAnimatedBackground(dur: Double) {
+        backgroundImg.image = UIImage.animatedImage(with: backgroundArray, duration: dur)
     }
     
     func displayMenu() {

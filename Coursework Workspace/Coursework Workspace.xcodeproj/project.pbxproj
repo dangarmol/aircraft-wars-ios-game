@@ -34,6 +34,8 @@
 		65B72D07205C0570000EFADC /* road9.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B72CF3205C056F000EFADC /* road9.png */; };
 		65B72D08205C0570000EFADC /* road6.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B72CF4205C056F000EFADC /* road6.png */; };
 		65B72D09205C0570000EFADC /* road11.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B72CF5205C0570000EFADC /* road11.png */; };
+		65F9FEB3206549A1000BA4E0 /* MiG-51.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 65F9FEB2206549A0000BA4E0 /* MiG-51.PNG */; };
+		65F9FEB520654C8E000BA4E0 /* DragPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9FEB420654C8E000BA4E0 /* DragPlane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		65B72CF3205C056F000EFADC /* road9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road9.png; sourceTree = "<group>"; };
 		65B72CF4205C056F000EFADC /* road6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road6.png; sourceTree = "<group>"; };
 		65B72CF5205C0570000EFADC /* road11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road11.png; sourceTree = "<group>"; };
+		65F9FEB2206549A0000BA4E0 /* MiG-51.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MiG-51.PNG"; sourceTree = "<group>"; };
+		65F9FEB420654C8E000BA4E0 /* DragPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragPlane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 		65958E2E2052DA42005CBF6C /* Coursework Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				65F9FEB2206549A0000BA4E0 /* MiG-51.PNG */,
 				65B72CE2205C056D000EFADC /* road1.png */,
 				65B72CE7205C056E000EFADC /* road2.png */,
 				65B72CE9205C056E000EFADC /* road3.png */,
@@ -160,6 +165,7 @@
 				65958E2F2052DA43005CBF6C /* AppDelegate.swift */,
 				65958E312052DA43005CBF6C /* ViewController.swift */,
 				65958E332052DA43005CBF6C /* Main.storyboard */,
+				65F9FEB420654C8E000BA4E0 /* DragPlane.swift */,
 				65958E362052DA43005CBF6C /* Assets.xcassets */,
 				65958E382052DA43005CBF6C /* LaunchScreen.storyboard */,
 				65958E3B2052DA43005CBF6C /* Info.plist */,
@@ -305,6 +311,7 @@
 				65958E3A2052DA43005CBF6C /* LaunchScreen.storyboard in Resources */,
 				65B72CFB205C0570000EFADC /* road2.png in Resources */,
 				65B72CF7205C0570000EFADC /* road20.png in Resources */,
+				65F9FEB3206549A1000BA4E0 /* MiG-51.PNG in Resources */,
 				65B72D07205C0570000EFADC /* road9.png in Resources */,
 				65B72D00205C0570000EFADC /* road8.png in Resources */,
 				65B72D09205C0570000EFADC /* road11.png in Resources */,
@@ -339,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F9FEB520654C8E000BA4E0 /* DragPlane.swift in Sources */,
 				65958E322052DA43005CBF6C /* ViewController.swift in Sources */,
 				65958E302052DA43005CBF6C /* AppDelegate.swift in Sources */,
 			);
