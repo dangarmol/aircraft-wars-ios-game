@@ -25,32 +25,32 @@
                                 <rect key="frame" x="139" y="538" width="74" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftF-A-28A.png" translatesAutoresizingMaskIntoConstraints="NO" id="kIF-u0-gnR">
-                                <rect key="frame" x="48" y="361" width="67" height="103"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftF-A-28A.png" translatesAutoresizingMaskIntoConstraints="NO" id="kIF-u0-gnR" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
+                                <rect key="frame" x="35" y="242" width="67" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftSR-91A.png" translatesAutoresizingMaskIntoConstraints="NO" id="tvN-Ye-cIN">
-                                <rect key="frame" x="130" y="361" width="66" height="103"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftSR-91A.png" translatesAutoresizingMaskIntoConstraints="NO" id="tvN-Ye-cIN" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
+                                <rect key="frame" x="116" y="354" width="66" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftSU-37K.png" translatesAutoresizingMaskIntoConstraints="NO" id="khs-fO-ibU">
-                                <rect key="frame" x="210" y="361" width="64" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="explosion1a.png" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-xs-fvk">
-                                <rect key="frame" x="124" y="170" width="122" height="122"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftSU-37K.png" translatesAutoresizingMaskIntoConstraints="NO" id="khs-fO-ibU" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
+                                <rect key="frame" x="245" y="459" width="64" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="missile1a.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uel-3M-Fkq">
-                                <rect key="frame" x="295" y="20" width="34" height="155"/>
+                                <rect key="frame" x="239" y="72" width="20" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="missile2a.png" translatesAutoresizingMaskIntoConstraints="NO" id="0nx-QA-tOR">
-                                <rect key="frame" x="65" y="40" width="37" height="144"/>
+                                <rect key="frame" x="106" y="63" width="23" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="warning1.png" translatesAutoresizingMaskIntoConstraints="NO" id="358-xJ-F7j">
                                 <rect key="frame" x="275" y="220" width="75" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="explosion1a.png" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-xs-fvk">
+                                <rect key="frame" x="115" y="181" width="122" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -64,6 +64,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="FA28AImg" destination="kIF-u0-gnR" id="G8r-Ch-7ie"/>
+                        <outlet property="MiG51Img" destination="2E4-3a-PJD" id="ZcT-vm-5bg"/>
+                        <outlet property="SR91AImg" destination="tvN-Ye-cIN" id="wq5-9h-fd3"/>
+                        <outlet property="SU37KImg" destination="khs-fO-ibU" id="L94-jA-cul"/>
                         <outlet property="backgroundImg" destination="gLn-MN-k2k" id="zZ4-e4-jzE"/>
                         <outlet property="explosionImg" destination="zvc-xs-fvk" id="z53-Yg-naP"/>
                         <outlet property="missile1Img" destination="Uel-3M-Fkq" id="8sm-pn-Cyr"/>

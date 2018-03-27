@@ -22,6 +22,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var warningImg: UIImageView!
     
+    @IBOutlet weak var MiG51Img: DragPlane!
+    
+    @IBOutlet weak var SU37KImg: DragPlane!
+    
+    @IBOutlet weak var FA28AImg: DragPlane!
+    
+    @IBOutlet weak var SR91AImg: DragPlane!
+    
     var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
     
     var explosionArray: [UIImage] = [UIImage(named: "explosion1a.png")!, UIImage(named: "explosion1b.png")!, UIImage(named: "explosion1c.png")!, UIImage(named: "explosion1d.png")!, UIImage(named: "explosion1e.png")!, UIImage(named: "explosion1f.png")!, UIImage(named: "explosion1g.png")!, UIImage(named: "explosion1h.png")!, UIImage(named: "explosion1i.png")!, UIImage(named: "explosion1j.png")!, UIImage(named: "explosion1k.png")!, UIImage(named: "explosion1l.png")!, UIImage(named: "explosion1m.png")!, UIImage(named: "explosion1n.png")!]
@@ -31,6 +39,14 @@ class ViewController: UIViewController {
     var missile2Array: [UIImage] = [UIImage(named: "missile2a.png")!, UIImage(named: "missile2b.png")!, UIImage(named: "missile2c.png")!]
     
     var warningArray: [UIImage] = [UIImage(named: "warning1.png")!, UIImage(named: "warning2.png")!]
+    
+    var FA28AArray: [UIImage] = [UIImage(named: "aircraftF-A-28Aa.png")!, UIImage(named: "aircraftF-A-28Ab.png")!]
+    
+    var MiG51Array: [UIImage] = [UIImage(named: "aircraftMiG-51a.png")!, UIImage(named: "aircraftMiG-51b.png")!]
+    
+    var SR91AArray: [UIImage] = [UIImage(named: "aircraftSR-91Aa.png")!, UIImage(named: "aircraftSR-91Ab.png")!]
+    
+    var SU37KArray: [UIImage] = [UIImage(named: "aircraftSU-37Ka.png")!, UIImage(named: "aircraftSU-37Kb.png")!]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +76,11 @@ class ViewController: UIViewController {
         missile2Img.image = UIImage.animatedImage(with: missile2Array, duration: 0.5)
         explosionImg.image = UIImage.animatedImage(with: explosionArray, duration: 0.5)
         warningImg.image = UIImage.animatedImage(with: warningArray, duration: 1)
+        
+        MiG51Img.image = UIImage.animatedImage(with: MiG51Array, duration: 0.25)
+        SU37KImg.image = UIImage.animatedImage(with: SU37KArray, duration: 0.25)
+        FA28AImg.image = UIImage.animatedImage(with: FA28AArray, duration: 0.25)
+        SR91AImg.image = UIImage.animatedImage(with: SR91AArray, duration: 0.25)
     }
     
     func setAnimatedBackground(dur: Double) {

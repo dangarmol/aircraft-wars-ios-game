@@ -93,6 +93,14 @@
 		65F3112A206A602F00B976D1 /* clouds34.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F310DB206A602E00B976D1 /* clouds34.png */; };
 		65F3112B206A602F00B976D1 /* missile2a.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F310DC206A602E00B976D1 /* missile2a.png */; };
 		65F3112C206A602F00B976D1 /* clouds29.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F310DD206A602E00B976D1 /* clouds29.png */; };
+		65F31135206A942D00B976D1 /* aircraftSR-91Aa.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F3112D206A942A00B976D1 /* aircraftSR-91Aa.png */; };
+		65F31136206A942D00B976D1 /* aircraftF-A-28Aa.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F3112E206A942B00B976D1 /* aircraftF-A-28Aa.png */; };
+		65F31137206A942D00B976D1 /* aircraftSU-37Ka.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F3112F206A942B00B976D1 /* aircraftSU-37Ka.png */; };
+		65F31138206A942D00B976D1 /* aircraftMiG-51b.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F31130206A942B00B976D1 /* aircraftMiG-51b.png */; };
+		65F31139206A942D00B976D1 /* aircraftSR-91Ab.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F31131206A942B00B976D1 /* aircraftSR-91Ab.png */; };
+		65F3113A206A942D00B976D1 /* aircraftF-A-28Ab.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F31132206A942C00B976D1 /* aircraftF-A-28Ab.png */; };
+		65F3113B206A942D00B976D1 /* aircraftMiG-51a.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F31133206A942C00B976D1 /* aircraftMiG-51a.png */; };
+		65F3113C206A942D00B976D1 /* aircraftSU-37Kb.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F31134206A942C00B976D1 /* aircraftSU-37Kb.png */; };
 		65F9FEB520654C8E000BA4E0 /* DragPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F9FEB420654C8E000BA4E0 /* DragPlane.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +214,14 @@
 		65F310DB206A602E00B976D1 /* clouds34.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds34.png; sourceTree = "<group>"; };
 		65F310DC206A602E00B976D1 /* missile2a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missile2a.png; sourceTree = "<group>"; };
 		65F310DD206A602E00B976D1 /* clouds29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds29.png; sourceTree = "<group>"; };
+		65F3112D206A942A00B976D1 /* aircraftSR-91Aa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftSR-91Aa.png"; sourceTree = "<group>"; };
+		65F3112E206A942B00B976D1 /* aircraftF-A-28Aa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftF-A-28Aa.png"; sourceTree = "<group>"; };
+		65F3112F206A942B00B976D1 /* aircraftSU-37Ka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftSU-37Ka.png"; sourceTree = "<group>"; };
+		65F31130206A942B00B976D1 /* aircraftMiG-51b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftMiG-51b.png"; sourceTree = "<group>"; };
+		65F31131206A942B00B976D1 /* aircraftSR-91Ab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftSR-91Ab.png"; sourceTree = "<group>"; };
+		65F31132206A942C00B976D1 /* aircraftF-A-28Ab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftF-A-28Ab.png"; sourceTree = "<group>"; };
+		65F31133206A942C00B976D1 /* aircraftMiG-51a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftMiG-51a.png"; sourceTree = "<group>"; };
+		65F31134206A942C00B976D1 /* aircraftSU-37Kb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aircraftSU-37Kb.png"; sourceTree = "<group>"; };
 		65F9FEB420654C8E000BA4E0 /* DragPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragPlane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,6 +273,14 @@
 		65958E2E2052DA42005CBF6C /* Coursework Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				65F3112E206A942B00B976D1 /* aircraftF-A-28Aa.png */,
+				65F31132206A942C00B976D1 /* aircraftF-A-28Ab.png */,
+				65F31133206A942C00B976D1 /* aircraftMiG-51a.png */,
+				65F31130206A942B00B976D1 /* aircraftMiG-51b.png */,
+				65F3112D206A942A00B976D1 /* aircraftSR-91Aa.png */,
+				65F31131206A942B00B976D1 /* aircraftSR-91Ab.png */,
+				65F3112F206A942B00B976D1 /* aircraftSU-37Ka.png */,
+				65F31134206A942C00B976D1 /* aircraftSU-37Kb.png */,
 				65F31092206A601B00B976D1 /* aircraftF-A-28A.png */,
 				65F310C0206A602500B976D1 /* aircraftMiG-51.png */,
 				65F310D5206A602C00B976D1 /* aircraftSR-91A.png */,
@@ -476,6 +500,7 @@
 				65958E3A2052DA43005CBF6C /* LaunchScreen.storyboard in Resources */,
 				65F310FF206A602E00B976D1 /* clouds21.png in Resources */,
 				65F31129206A602F00B976D1 /* clouds09.png in Resources */,
+				65F3113C206A942D00B976D1 /* aircraftSU-37Kb.png in Resources */,
 				65F31123206A602F00B976D1 /* clouds24.png in Resources */,
 				65F310E5206A602E00B976D1 /* missile1c.png in Resources */,
 				65F310E1206A602E00B976D1 /* aircraftF-A-28A.png in Resources */,
@@ -484,6 +509,7 @@
 				65F310F5206A602E00B976D1 /* clouds10.png in Resources */,
 				65F31120206A602F00B976D1 /* clouds23.png in Resources */,
 				65F310F6206A602E00B976D1 /* clouds22.png in Resources */,
+				65F31138206A942D00B976D1 /* aircraftMiG-51b.png in Resources */,
 				65958E372052DA43005CBF6C /* Assets.xcassets in Resources */,
 				65F31101206A602F00B976D1 /* explosion1i.png in Resources */,
 				65F310FD206A602E00B976D1 /* explosion1f.png in Resources */,
@@ -497,16 +523,19 @@
 				65F310E6206A602E00B976D1 /* clouds43.png in Resources */,
 				65F310EE206A602E00B976D1 /* missile2b.png in Resources */,
 				65F31114206A602F00B976D1 /* explosion1k.png in Resources */,
+				65F31137206A942D00B976D1 /* aircraftSU-37Ka.png in Resources */,
 				65F31103206A602F00B976D1 /* clouds53.png in Resources */,
 				65F310E4206A602E00B976D1 /* clouds31.png in Resources */,
 				65F310FE206A602E00B976D1 /* missile1a.png in Resources */,
 				65F310F1206A602E00B976D1 /* clouds40.png in Resources */,
 				65958E352052DA43005CBF6C /* Main.storyboard in Resources */,
 				65F310FB206A602E00B976D1 /* warning2.png in Resources */,
+				65F3113A206A942D00B976D1 /* aircraftF-A-28Ab.png in Resources */,
 				65F310F0206A602E00B976D1 /* missile2c.png in Resources */,
 				65F31121206A602F00B976D1 /* clouds45.png in Resources */,
 				65F31124206A602F00B976D1 /* aircraftSR-91A.png in Resources */,
 				65F3110E206A602F00B976D1 /* clouds15.png in Resources */,
+				65F31139206A942D00B976D1 /* aircraftSR-91Ab.png in Resources */,
 				65F310FC206A602E00B976D1 /* clouds28.png in Resources */,
 				65F310F9206A602E00B976D1 /* explosion1e.png in Resources */,
 				65F31116206A602F00B976D1 /* clouds03.png in Resources */,
@@ -516,6 +545,7 @@
 				65F31119206A602F00B976D1 /* explosion1n.png in Resources */,
 				65F310EF206A602E00B976D1 /* clouds14.png in Resources */,
 				65F3110A206A602F00B976D1 /* clouds30.png in Resources */,
+				65F31136206A942D00B976D1 /* aircraftF-A-28Aa.png in Resources */,
 				65F31127206A602F00B976D1 /* clouds08.png in Resources */,
 				65F3110F206A602F00B976D1 /* aircraftMiG-51.png in Resources */,
 				65F3112C206A602F00B976D1 /* clouds29.png in Resources */,
@@ -534,6 +564,7 @@
 				65F310E0206A602E00B976D1 /* warning1.png in Resources */,
 				65F3110C206A602F00B976D1 /* explosion1a.png in Resources */,
 				65F31108206A602F00B976D1 /* clouds33.png in Resources */,
+				65F3113B206A942D00B976D1 /* aircraftMiG-51a.png in Resources */,
 				65F310ED206A602E00B976D1 /* clouds16.png in Resources */,
 				65F310DF206A602E00B976D1 /* explosion1d.png in Resources */,
 				65F3110B206A602F00B976D1 /* clouds46.png in Resources */,
@@ -551,6 +582,7 @@
 				65F310F7206A602E00B976D1 /* clouds25.png in Resources */,
 				65F310EB206A602E00B976D1 /* clouds07.png in Resources */,
 				65F3110D206A602F00B976D1 /* clouds02.png in Resources */,
+				65F31135206A942D00B976D1 /* aircraftSR-91Aa.png in Resources */,
 				65F31111206A602F00B976D1 /* clouds37.png in Resources */,
 				65F3111B206A602F00B976D1 /* clouds42.png in Resources */,
 				65F310E7206A602E00B976D1 /* clouds04.png in Resources */,
