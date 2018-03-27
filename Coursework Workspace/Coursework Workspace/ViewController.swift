@@ -14,26 +14,23 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var planeImg: UIImageView!
     
-    var backgroundArray: [UIImage] = [  UIImage(named: "road1.png")!,
-                                        UIImage(named: "road2.png")!,
-                                        UIImage(named: "road3.png")!,
-                                        UIImage(named: "road4.png")!,
-                                        UIImage(named: "road5.png")!,
-                                        UIImage(named: "road6.png")!,
-                                        UIImage(named: "road7.png")!,
-                                        UIImage(named: "road8.png")!,
-                                        UIImage(named: "road9.png")!,
-                                        UIImage(named: "road10.png")!,
-                                        UIImage(named: "road11.png")!,
-                                        UIImage(named: "road12.png")!,
-                                        UIImage(named: "road13.png")!,
-                                        UIImage(named: "road14.png")!,
-                                        UIImage(named: "road15.png")!,
-                                        UIImage(named: "road16.png")!,
-                                        UIImage(named: "road17.png")!,
-                                        UIImage(named: "road18.png")!,
-                                        UIImage(named: "road19.png")!,
-                                        UIImage(named: "road20.png")!]
+    @IBOutlet weak var missile1Img: UIImageView!
+    
+    @IBOutlet weak var missile2Img: UIImageView!
+    
+    @IBOutlet weak var explosionImg: UIImageView!
+    
+    @IBOutlet weak var warningImg: UIImageView!
+    
+    var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
+    
+    var explosionArray: [UIImage] = [UIImage(named: "explosion1a.png")!, UIImage(named: "explosion1b.png")!, UIImage(named: "explosion1c.png")!, UIImage(named: "explosion1d.png")!, UIImage(named: "explosion1e.png")!, UIImage(named: "explosion1f.png")!, UIImage(named: "explosion1g.png")!, UIImage(named: "explosion1h.png")!, UIImage(named: "explosion1i.png")!, UIImage(named: "explosion1j.png")!, UIImage(named: "explosion1k.png")!, UIImage(named: "explosion1l.png")!, UIImage(named: "explosion1m.png")!, UIImage(named: "explosion1n.png")!]
+    
+    var missile1Array: [UIImage] = [UIImage(named: "missile1a.png")!, UIImage(named: "missile1b.png")!, UIImage(named: "missile1c.png")!]
+    
+    var missile2Array: [UIImage] = [UIImage(named: "missile2a.png")!, UIImage(named: "missile2b.png")!, UIImage(named: "missile2c.png")!]
+    
+    var warningArray: [UIImage] = [UIImage(named: "warning1.png")!, UIImage(named: "warning2.png")!]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +46,20 @@ class ViewController: UIViewController {
     }
 
     func loadGraphics(/*Plane image data should be here*/) {
-        setAnimatedBackground(dur: 0.5)
+        setAnimatedBackground(dur: 1)
+        setAllAnimations()
         //planeImg.image.
     }
     
     func startGameEngine() {
         
+    }
+    
+    func setAllAnimations() {
+        missile1Img.image = UIImage.animatedImage(with: missile1Array, duration: 0.5)
+        missile2Img.image = UIImage.animatedImage(with: missile2Array, duration: 0.5)
+        explosionImg.image = UIImage.animatedImage(with: explosionArray, duration: 0.5)
+        warningImg.image = UIImage.animatedImage(with: warningArray, duration: 1)
     }
     
     func setAnimatedBackground(dur: Double) {
