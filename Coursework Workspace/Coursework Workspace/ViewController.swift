@@ -12,8 +12,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var backgroundImg: UIImageView!
     
-    @IBOutlet weak var planeImg: UIImageView!
-    
     @IBOutlet weak var missile1Img: UIImageView!
     
     @IBOutlet weak var missile2Img: UIImageView!
@@ -29,6 +27,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var FA28AImg: DragPlane!
     
     @IBOutlet weak var SR91AImg: DragPlane!
+    
+    @IBOutlet weak var planeImg: DragPlane!
     
     var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
     
@@ -50,8 +50,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayMenu() //To display the game menu.
-        loadGraphics()
         startGameEngine()
         displayMenu() //To display the game menu.
     }
@@ -61,17 +59,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func loadGraphics(/*Plane image data should be here*/) {
+    func loadGame(plane: [UIImage]) {
         setAnimatedBackground(dur: 1)
-        setAllAnimations()
-        //planeImg.image.
+        planeImg.image = UIImage.animatedImage(with: plane, duration: 0.25)
+        //testAllAnimations() //Only for testing purposes
     }
     
     func startGameEngine() {
         
     }
     
-    func setAllAnimations() {
+    func testAllAnimations() {
         missile1Img.image = UIImage.animatedImage(with: missile1Array, duration: 0.5)
         missile2Img.image = UIImage.animatedImage(with: missile2Array, duration: 0.5)
         explosionImg.image = UIImage.animatedImage(with: explosionArray, duration: 0.5)
@@ -89,6 +87,8 @@ class ViewController: UIViewController {
     
     func displayMenu() {
         //On click, call hideMenu
+        loadGame(plane: FA28AArray)
+        hideMenu()
     }
     
     func hideMenu() {

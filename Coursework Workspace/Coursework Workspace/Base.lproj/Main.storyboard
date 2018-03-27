@@ -22,35 +22,39 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftMiG-51.png" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-3a-PJD" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
-                                <rect key="frame" x="139" y="538" width="74" height="109"/>
+                                <rect key="frame" x="258" y="363" width="59" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftF-A-28A.png" translatesAutoresizingMaskIntoConstraints="NO" id="kIF-u0-gnR" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
-                                <rect key="frame" x="35" y="242" width="67" height="103"/>
+                                <rect key="frame" x="125" y="363" width="59" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftSR-91A.png" translatesAutoresizingMaskIntoConstraints="NO" id="tvN-Ye-cIN" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
-                                <rect key="frame" x="116" y="354" width="66" height="103"/>
+                                <rect key="frame" x="58" y="363" width="59" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftSU-37K.png" translatesAutoresizingMaskIntoConstraints="NO" id="khs-fO-ibU" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
-                                <rect key="frame" x="245" y="459" width="64" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="missile1a.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uel-3M-Fkq">
-                                <rect key="frame" x="239" y="72" width="20" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="missile2a.png" translatesAutoresizingMaskIntoConstraints="NO" id="0nx-QA-tOR">
-                                <rect key="frame" x="106" y="63" width="23" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="warning1.png" translatesAutoresizingMaskIntoConstraints="NO" id="358-xJ-F7j">
-                                <rect key="frame" x="275" y="220" width="75" height="72"/>
+                                <rect key="frame" x="191" y="363" width="59" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="explosion1a.png" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-xs-fvk">
-                                <rect key="frame" x="115" y="181" width="122" height="122"/>
+                                <rect key="frame" x="126" y="183" width="122" height="122"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="missile1a.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uel-3M-Fkq">
+                                <rect key="frame" x="276" y="61" width="23" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="warning1.png" translatesAutoresizingMaskIntoConstraints="NO" id="358-xJ-F7j">
+                                <rect key="frame" x="150" y="61" width="75" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aircraftF-A-28A.png" translatesAutoresizingMaskIntoConstraints="NO" id="rOd-vf-tIc" customClass="DragPlane" customModule="Coursework_Workspace" customModuleProvider="target">
+                                <rect key="frame" x="158" y="544" width="59" height="103"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="missile2a.png" translatesAutoresizingMaskIntoConstraints="NO" id="0nx-QA-tOR">
+                                <rect key="frame" x="76" y="61" width="23" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -72,7 +76,7 @@
                         <outlet property="explosionImg" destination="zvc-xs-fvk" id="z53-Yg-naP"/>
                         <outlet property="missile1Img" destination="Uel-3M-Fkq" id="8sm-pn-Cyr"/>
                         <outlet property="missile2Img" destination="0nx-QA-tOR" id="PDD-l2-mYz"/>
-                        <outlet property="planeImg" destination="2E4-3a-PJD" id="i7A-ew-vI5"/>
+                        <outlet property="planeImg" destination="rOd-vf-tIc" id="YaC-cc-0QC"/>
                         <outlet property="warningImg" destination="358-xJ-F7j" id="HUA-fG-xpP"/>
                     </connections>
                 </viewController>
