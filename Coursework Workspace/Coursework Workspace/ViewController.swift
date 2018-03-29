@@ -12,26 +12,18 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var backgroundImg: UIImageView!
     
-    @IBOutlet weak var missile1Img: UIImageView!
-    
-    @IBOutlet weak var missile2Img: UIImageView!
-    
-    @IBOutlet weak var explosionImg: UIImageView!
-    
-    @IBOutlet weak var warningImg: UIImageView!
-    
-    @IBOutlet weak var MiG51Img: DragPlane!
-    
-    @IBOutlet weak var SU37KImg: DragPlane!
-    
-    @IBOutlet weak var FA28AImg: DragPlane!
-    
-    @IBOutlet weak var SR91AImg: DragPlane!
-    
     @IBOutlet weak var planeImg: DragPlane!
     
     var dynamicAnimator: UIDynamicAnimator!
     var gravityBehavior: UIGravityBehavior!
+    
+    var mainMenu: UIImageView!
+    var endMenu: UIImageView!
+    
+    var gameInPlay: Bool!
+    
+    var level: Int!
+    var aircraftType: Int!
     
     var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
     
@@ -53,7 +45,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startGameEngine()
         displayMenu() //To display the game menu.
     }
 
@@ -61,37 +52,26 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func loadGame(plane: [UIImage]) {
         setAnimatedBackground(dur: 1)
         planeImg.image = UIImage.animatedImage(with: plane, duration: 0.25)
         
         self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
         
-        spawnRandomMissile()
+        gameInPlay = true;
         
-        let when = DispatchTime.now() + 1
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.spawnRandomMissile()
-            let when = DispatchTime.now() + 1
+        fireMissiles(interval: 0.2)
+    }
+    
+    func fireMissiles(interval: Double) {
+        if(gameInPlay) {
+            let when = DispatchTime.now() + interval
             DispatchQueue.main.asyncAfter(deadline: when) {
                 self.spawnRandomMissile()
-                let when = DispatchTime.now() + 1
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.spawnRandomMissile()
-                    let when = DispatchTime.now() + 1
-                    DispatchQueue.main.asyncAfter(deadline: when) {
-                        self.spawnRandomMissile()
-                        let when = DispatchTime.now() + 1
-                        DispatchQueue.main.asyncAfter(deadline: when) {
-                            self.spawnRandomMissile()
-                        }
-                    }
-                }
+                self.fireMissiles(interval: interval)
             }
         }
-        
-        //testAllAnimations() //Only for testing purposes
     }
     
     func startGameEngine() {
@@ -127,23 +107,22 @@ class ViewController: UIViewController {
             
             self.view.addSubview(missileView)
             
-            //Only works for 1 missile at a time
             self.gravityBehavior = UIGravityBehavior(items: [missileView])
             self.gravityBehavior.magnitude = 1 //TODO Change this depending on level as well as missile frequency!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             self.dynamicAnimator.addBehavior(self.gravityBehavior)
         }
     }
     
-    func testAllAnimations() {
-        missile1Img.image = UIImage.animatedImage(with: missile1Array, duration: 0.5)
-        missile2Img.image = UIImage.animatedImage(with: missile2Array, duration: 0.5)
-        explosionImg.image = UIImage.animatedImage(with: explosionArray, duration: 0.5)
-        warningImg.image = UIImage.animatedImage(with: warningArray, duration: 1)
+    func loadButtons() {
+        //Create easy level
+        //Create medium level
+        //Create hard level
+        //Create expert level
         
-        MiG51Img.image = UIImage.animatedImage(with: MiG51Array, duration: 0.25)
-        SU37KImg.image = UIImage.animatedImage(with: SU37KArray, duration: 0.25)
-        FA28AImg.image = UIImage.animatedImage(with: FA28AArray, duration: 0.25)
-        SR91AImg.image = UIImage.animatedImage(with: SR91AArray, duration: 0.25)
+        //Create SR-91A button
+        //Create F/A-28A button
+        //Create Su-37K button
+        //Create MiG-51 button
     }
     
     func setAnimatedBackground(dur: Double) {
@@ -152,6 +131,8 @@ class ViewController: UIViewController {
     
     func displayMenu() {
         //On click, call hideMenu
+        loadButtons()
+        
         loadGame(plane: FA28AArray)
         hideMenu()
     }
