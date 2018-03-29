@@ -18,12 +18,25 @@ class ViewController: UIViewController {
     var gravityBehavior: UIGravityBehavior!
     
     var mainMenuBackground: UIImageView!
-    var endMenuBackground: UIImageView!
+    var endMenuWinBackground: UIImageView!
+    var endMenuLossBackground: UIImageView!
+    var startButton: UIButton!
+    var aircraftSelector: UISegmentedControl!
+    var levelSelector: UISegmentedControl!
+    
+    let levels = ["Easy", "Medium", "Expert", "Ludicrous", "Onslaught!"]
+    let planes = ["SR-91A", "F/A-28A", "Su-37K", "MiG-51"]
+    let onslaughtLevels = ["Beginner", "Medium", "Hard", "Expert", "Ludicrous", "EXTREME!!!", "IMPOSSIBLE???"]
     
     var gameInPlay: Bool!
-    
     var level: Int!
+    var gradual: Bool!
     var aircraftType: Int!
+    var bonus: Int!
+    var score: Int!
+    var dodges: Int!
+    var armor: Int!
+    
     
     var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
     
@@ -45,8 +58,6 @@ class ViewController: UIViewController {
     
     let screenSize = UIScreen.main.bounds
     
-    var mainScreenImg = UIImage(named: "screenMain.png")!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDefaults()
@@ -59,22 +70,27 @@ class ViewController: UIViewController {
     }
     
     func loadDefaults() {
-        self.aircraftType = 1
+        self.aircraftType = 0
         self.level = 1
         self.gameInPlay = false
+        self.score = 0
+        self.gradual = false
+        self.bonus = 1
+        self.dodges = 0
+        self.armor = 1
     }
     
     func loadGame(plane: Int, level: Int) {
         setAnimatedBackground(dur: 1)
         var planeImage: [UIImage]
         switch plane {
-        case 1:
+        case 0:
             planeImage = self.SR91AArray
-        case 2:
+        case 1:
             planeImage = self.FA28AArray
-        case 3:
+        case 2:
             planeImage = self.Su37KArray
-        case 4:
+        case 3:
             planeImage = self.MiG51Array
             
         default:
@@ -82,8 +98,11 @@ class ViewController: UIViewController {
         }
         
         planeImg.image = UIImage.animatedImage(with: planeImage, duration: 0.25)
+        planeImg.center = CGPoint(x: (self.screenSize.width / 2), y: (self.screenSize.height * 0.85))
         
         self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view) //Starts the dynamicAnimator used for missiles
+        self.gravityBehavior = UIGravityBehavior()
+        self.gravityBehavior.magnitude = 1
     }
     
     func fireMissiles(interval: Double) {
@@ -91,24 +110,27 @@ class ViewController: UIViewController {
             let when = DispatchTime.now() + interval
             DispatchQueue.main.asyncAfter(deadline: when) {
                 self.spawnRandomMissile()
-                self.fireMissiles(interval: interval)
+                self.startLaunch(level: self.level!)
             }
         }
     }
     
-    func startGameEngine(level: Int) {
-        self.gameInPlay = true;
-        
+    func startLaunch(level: Int) {
         switch level {
+        case 0:
+            fireMissiles(interval: 1.00)
         case 1:
-            fireMissiles(interval: 1)
-        case 2:
             fireMissiles(interval: 0.75)
+        case 2:
+            fireMissiles(interval: 0.55)
         case 3:
-            fireMissiles(interval: 0.5)
+            fireMissiles(interval: 0.30)
         case 4:
-            fireMissiles(interval: 0.25)
-            
+            fireMissiles(interval: 0.15)
+        case 5:
+            fireMissiles(interval: 0.10)
+        case 6:
+            fireMissiles(interval: 0.07)
         default:
             fireMissiles(interval: 1)
         }
@@ -142,10 +164,41 @@ class ViewController: UIViewController {
             
             self.view.addSubview(missileView)
             
-            self.gravityBehavior = UIGravityBehavior(items: [missileView])
-            self.gravityBehavior.magnitude = 1 //TODO Change this depending on level as well as missile frequency!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             self.dynamicAnimator.addBehavior(self.gravityBehavior)
+            self.gravityBehavior.addItem(missileView)
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.score = self.score! + self.level! + self.bonus!
+                self.dodges = self.dodges! + 1
+                print("Armor: " + String(self.armor!) + " | Score: " + String(self.score!) + " | Avoided: " + String(self.dodges!) + " | Bonus: " + String(self.bonus!) + " | Level: " + self.onslaughtLevels[self.level!])
+                
+                if(self.gradual) {
+                    switch self.level! {
+                    case 0:
+                        if(self.score! >= 10) {self.bonus! = self.bonus! + 1; self.armor! = self.armor! + 2; self.levelUp()}
+                    case 1:
+                        if(self.score! >= 50) {self.bonus! = self.bonus! + 2; self.armor! = self.armor! + 3; self.levelUp()}
+                    case 2:
+                        if(self.score! >= 100) {self.bonus! = self.bonus! + 3; self.armor! = self.armor! + 4; self.levelUp()}
+                    case 3:
+                        if(self.score! >= 500) {self.bonus! = self.bonus! + 4; self.armor! = self.armor! + 5; self.levelUp()}
+                    case 4:
+                        if(self.score! >= 1000) {self.bonus! = self.bonus! + 5; self.armor! = self.armor! + 7; self.levelUp()}
+                    case 5:
+                        if(self.score! >= 5000) {self.bonus! = self.bonus! + 10; self.armor! = self.armor! + 10; self.levelUp()}
+                    case 6:
+                        self.bonus! = self.bonus! + 1
+                        if(self.dodges! % 100 == 0) {self.armor! = self.armor! + 10} //Maybe change to 200
+                    default:
+                        break
+                    }
+                }
+            }
         }
+    }
+    
+    func levelUp() {
+        self.level = self.level! + 1
     }
     
     func setAnimatedBackground(dur: Double) {
@@ -154,46 +207,73 @@ class ViewController: UIViewController {
     
     func displayMenu() {
         createMainScreen()
-        //OnClick
-        parseGameAttributes()
-        hideMenu()
-        loadGame(plane: self.aircraftType, level: self.level)
-        startGameEngine(level: self.level)
     }
     
     func createMainScreen() {
-        mainMenuBackground.image = self.mainScreenImg
-        
-        mainMenuBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width, height: self.screenSize.height)
+        mainMenuBackground = UIImageView(image: nil)
+        mainMenuBackground.image = UIImage(named: "screenMain.png")
+        mainMenuBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width + 1, height: self.screenSize.height + 1)
+        self.mainMenuBackground.isHidden = false
         
         self.view.addSubview(mainMenuBackground)
         
-        //Create easy level
-        //Create medium level
-        //Create hard level
-        //Create expert level
+        levelSelector = UISegmentedControl(items: self.levels)
+        levelSelector.selectedSegmentIndex = 1
+        levelSelector.center = CGPoint(x: self.screenSize.width / 2, y: self.screenSize.height * 0.83)
+        levelSelector.backgroundColor = UIColor(red:172/255.0, green:189/255.0, blue:83/255.0, alpha:1)
+        levelSelector.tintColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        (levelSelector.subviews[3] as UIView).backgroundColor = UIColor.black
+        (levelSelector.subviews[3] as UIView).tintColor = UIColor.red
+        levelSelector.layer.cornerRadius = 5.0
         
-        //Create SR-91A button
-        //Create F/A-28A button
-        //Create Su-37K button
-        //Create MiG-51 button
+        self.levelSelector.isHidden = false
+        self.view.addSubview(levelSelector)
+       
+        aircraftSelector = UISegmentedControl(items: self.planes)
+        aircraftSelector.selectedSegmentIndex = 0
+        aircraftSelector.center = CGPoint(x: self.screenSize.width / 2, y: self.screenSize.height * 0.88)
+        aircraftSelector.backgroundColor = UIColor(red:172/255.0, green:189/255.0, blue:83/255.0, alpha:1)
+        aircraftSelector.tintColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        aircraftSelector.layer.cornerRadius = 5.0
         
-        //Create Play! button
+        self.aircraftSelector.isHidden = false
+        self.view.addSubview(aircraftSelector)
+        
+        startButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2) - 60, y: (self.screenSize.height * 0.95) - 15, width: 120, height: 30))
+        startButton.backgroundColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        startButton.setTitle("Start Game!", for: UIControlState.normal)
+        startButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchDown)
+        
+        self.startButton.isHidden = false
+        self.view.addSubview(startButton)
     }
     
-    func setLevel(levelParsed: Int) {
-        self.level = levelParsed
+    @objc func buttonTapped(_ button: UIButton) {
+        playButtonAction(sender: button)
     }
     
-    func setAircraft(aircraftParsed: Int) {
-        self.aircraftType = aircraftParsed
+    func playButtonAction(sender: UIButton!) {
+        parseGameAttributes()
+        hideMenu()
+        loadGame(plane: self.aircraftType, level: self.level)
+        self.gameInPlay = true;
+        startLaunch(level: self.level)
     }
     
     func parseGameAttributes() {
-        
+        self.aircraftType = self.aircraftSelector.selectedSegmentIndex
+        if(self.levelSelector.selectedSegmentIndex != 4) {
+            self.level = self.levelSelector.selectedSegmentIndex
+        } else {
+            self.level = 0
+            self.gradual = true
+        }
     }
     
     func hideMenu() {
-        //view.isHidden = true; to make an app seem like it has more than one view
+        self.mainMenuBackground.isHidden = true
+        self.startButton.isHidden = true
+        self.aircraftSelector.isHidden = true
+        self.levelSelector.isHidden = true
     }
 }
