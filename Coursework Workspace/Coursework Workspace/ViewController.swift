@@ -66,8 +66,31 @@ class ViewController: UIViewController {
         setAnimatedBackground(dur: 1)
         planeImg.image = UIImage.animatedImage(with: plane, duration: 0.25)
         
+        self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
+        
         spawnRandomMissile()
-
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.spawnRandomMissile()
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                self.spawnRandomMissile()
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.spawnRandomMissile()
+                    let when = DispatchTime.now() + 1
+                    DispatchQueue.main.asyncAfter(deadline: when) {
+                        self.spawnRandomMissile()
+                        let when = DispatchTime.now() + 1
+                        DispatchQueue.main.asyncAfter(deadline: when) {
+                            self.spawnRandomMissile()
+                        }
+                    }
+                }
+            }
+        }
+        
         //testAllAnimations() //Only for testing purposes
     }
     
@@ -104,9 +127,9 @@ class ViewController: UIViewController {
             
             self.view.addSubview(missileView)
             
-            self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
-            
+            //Only works for 1 missile at a time
             self.gravityBehavior = UIGravityBehavior(items: [missileView])
+            self.gravityBehavior.magnitude = 1 //TODO Change this depending on level as well as missile frequency!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             self.dynamicAnimator.addBehavior(self.gravityBehavior)
         }
     }
