@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     var dynamicAnimator: UIDynamicAnimator!
     var gravityBehavior: UIGravityBehavior!
     
-    var mainMenu: UIImageView!
-    var endMenu: UIImageView!
+    var mainMenuBackground: UIImageView!
+    var endMenuBackground: UIImageView!
     
     var gameInPlay: Bool!
     
@@ -35,16 +35,21 @@ class ViewController: UIViewController {
     
     var warningArray: [UIImage] = [UIImage(named: "warning1.png")!, UIImage(named: "warning2.png")!]
     
+    var SR91AArray: [UIImage] = [UIImage(named: "aircraftSR-91Aa.png")!, UIImage(named: "aircraftSR-91Ab.png")!]
+    
     var FA28AArray: [UIImage] = [UIImage(named: "aircraftF-A-28Aa.png")!, UIImage(named: "aircraftF-A-28Ab.png")!]
+    
+    var Su37KArray: [UIImage] = [UIImage(named: "aircraftSU-37Ka.png")!, UIImage(named: "aircraftSU-37Kb.png")!]
     
     var MiG51Array: [UIImage] = [UIImage(named: "aircraftMiG-51a.png")!, UIImage(named: "aircraftMiG-51b.png")!]
     
-    var SR91AArray: [UIImage] = [UIImage(named: "aircraftSR-91Aa.png")!, UIImage(named: "aircraftSR-91Ab.png")!]
+    let screenSize = UIScreen.main.bounds
     
-    var SU37KArray: [UIImage] = [UIImage(named: "aircraftSU-37Ka.png")!, UIImage(named: "aircraftSU-37Kb.png")!]
+    var mainScreenImg = UIImage(named: "screenMain.png")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDefaults()
         displayMenu() //To display the game menu.
     }
 
@@ -53,15 +58,32 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loadGame(plane: [UIImage]) {
+    func loadDefaults() {
+        self.aircraftType = 1
+        self.level = 1
+        self.gameInPlay = false
+    }
+    
+    func loadGame(plane: Int, level: Int) {
         setAnimatedBackground(dur: 1)
-        planeImg.image = UIImage.animatedImage(with: plane, duration: 0.25)
+        var planeImage: [UIImage]
+        switch plane {
+        case 1:
+            planeImage = self.SR91AArray
+        case 2:
+            planeImage = self.FA28AArray
+        case 3:
+            planeImage = self.Su37KArray
+        case 4:
+            planeImage = self.MiG51Array
+            
+        default:
+            planeImage = self.SR91AArray
+        }
         
-        self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
+        planeImg.image = UIImage.animatedImage(with: planeImage, duration: 0.25)
         
-        gameInPlay = true;
-        
-        fireMissiles(interval: 0.2)
+        self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view) //Starts the dynamicAnimator used for missiles
     }
     
     func fireMissiles(interval: Double) {
@@ -74,19 +96,32 @@ class ViewController: UIViewController {
         }
     }
     
-    func startGameEngine() {
+    func startGameEngine(level: Int) {
+        self.gameInPlay = true;
         
+        switch level {
+        case 1:
+            fireMissiles(interval: 1)
+        case 2:
+            fireMissiles(interval: 0.75)
+        case 3:
+            fireMissiles(interval: 0.5)
+        case 4:
+            fireMissiles(interval: 0.25)
+            
+        default:
+            fireMissiles(interval: 1)
+        }
     }
     
     func spawnRandomMissile() {
-        let screenSize = UIScreen.main.bounds
-        let randomXSpawn = CGFloat(arc4random_uniform(UInt32(screenSize.width)))
+        let randomXSpawn = CGFloat(arc4random_uniform(UInt32(self.screenSize.width)))
         spawnMissileAt(xSpawn: randomXSpawn)
     }
     
     func spawnMissileAt(xSpawn: CGFloat) {
         let warningView = UIImageView(image: nil)
-        
+
         warningView.image = UIImage.animatedImage(with: warningArray, duration: 0.25)
         warningView.frame = CGRect(x:xSpawn - (75/2), y: 0, width: 75, height: 75)
         self.view.addSubview(warningView)
@@ -113,7 +148,26 @@ class ViewController: UIViewController {
         }
     }
     
-    func loadButtons() {
+    func setAnimatedBackground(dur: Double) {
+        backgroundImg.image = UIImage.animatedImage(with: backgroundArray, duration: dur)
+    }
+    
+    func displayMenu() {
+        createMainScreen()
+        //OnClick
+        parseGameAttributes()
+        hideMenu()
+        loadGame(plane: self.aircraftType, level: self.level)
+        startGameEngine(level: self.level)
+    }
+    
+    func createMainScreen() {
+        mainMenuBackground.image = self.mainScreenImg
+        
+        mainMenuBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width, height: self.screenSize.height)
+        
+        self.view.addSubview(mainMenuBackground)
+        
         //Create easy level
         //Create medium level
         //Create hard level
@@ -123,18 +177,20 @@ class ViewController: UIViewController {
         //Create F/A-28A button
         //Create Su-37K button
         //Create MiG-51 button
-    }
-    
-    func setAnimatedBackground(dur: Double) {
-        backgroundImg.image = UIImage.animatedImage(with: backgroundArray, duration: dur)
-    }
-    
-    func displayMenu() {
-        //On click, call hideMenu
-        loadButtons()
         
-        loadGame(plane: FA28AArray)
-        hideMenu()
+        //Create Play! button
+    }
+    
+    func setLevel(levelParsed: Int) {
+        self.level = levelParsed
+    }
+    
+    func setAircraft(aircraftParsed: Int) {
+        self.aircraftType = aircraftParsed
+    }
+    
+    func parseGameAttributes() {
+        
     }
     
     func hideMenu() {
