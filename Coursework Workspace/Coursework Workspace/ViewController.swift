@@ -14,13 +14,20 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var planeImg: DragPlane!
     
+    var gameTextFieldA: UITextField!
+    var gameTextFieldB: UITextField!
+    
+    var endGameTextField: UITextField!
+    
     var dynamicAnimator: UIDynamicAnimator!
     var gravityBehavior: UIGravityBehavior!
+    var collisionBehavior: UICollisionBehavior!
     
     var mainMenuBackground: UIImageView!
-    var endMenuWinBackground: UIImageView!
-    var endMenuLossBackground: UIImageView!
+    var endMenuTimeUpBackground: UIImageView!
+    var endMenuGameOverBackground: UIImageView!
     var startButton: UIButton!
+    var endGameButton: UIButton!
     var aircraftSelector: UISegmentedControl!
     var levelSelector: UISegmentedControl!
     
@@ -30,13 +37,12 @@ class ViewController: UIViewController {
     
     var gameInPlay: Bool!
     var level: Int!
-    var gradual: Bool!
+    var onslaught: Bool!
     var aircraftType: Int!
     var bonus: Int!
     var score: Int!
     var dodges: Int!
     var armor: Int!
-    
     
     var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
     
@@ -74,10 +80,14 @@ class ViewController: UIViewController {
         self.level = 1
         self.gameInPlay = false
         self.score = 0
-        self.gradual = false
+        self.onslaught = false
         self.bonus = 1
         self.dodges = 0
         self.armor = 1
+        if(self.gameTextFieldA != nil && self.gameTextFieldB != nil) {
+            self.gameTextFieldA.text = ""
+            self.gameTextFieldB.text = ""
+        }
     }
     
     func loadGame(plane: Int, level: Int) {
@@ -97,6 +107,33 @@ class ViewController: UIViewController {
             planeImage = self.SR91AArray
         }
         
+        self.planeImg.isHidden = false
+        
+        if(gameTextFieldA == nil) {
+            gameTextFieldA = UITextField()
+            gameTextFieldA.frame = CGRect(x: 0, y: screenSize.height * 0.93, width: screenSize.width, height: 40)
+            self.gameTextFieldA.isHidden = false
+            gameTextFieldA.textAlignment = .center
+            self.view.addSubview(gameTextFieldA)
+        } else {
+            self.gameTextFieldA.isHidden = false
+        }
+        
+        if(gameTextFieldB == nil) {
+            gameTextFieldB = UITextField()
+            gameTextFieldB.frame = CGRect(x: 0, y: screenSize.height * 0.96, width: screenSize.width, height: 40)
+            self.gameTextFieldB.isHidden = false
+            gameTextFieldB.textAlignment = .center
+            self.view.addSubview(gameTextFieldB)
+        } else {
+            self.gameTextFieldB.isHidden = false
+        }
+        
+        if(self.onslaught) {
+            gameTextFieldA.text = "Armor: " + String(self.armor!) + " | Score: " + String(self.score!) + " | Avoided: " + String(self.dodges!)
+            gameTextFieldB.text = "Bonus: " + String(self.bonus!) + " | Level: " + self.onslaughtLevels[self.level!]
+        }
+            
         planeImg.image = UIImage.animatedImage(with: planeImage, duration: 0.25)
         planeImg.center = CGPoint(x: (self.screenSize.width / 2), y: (self.screenSize.height * 0.85))
         
@@ -145,7 +182,7 @@ class ViewController: UIViewController {
         let warningView = UIImageView(image: nil)
 
         warningView.image = UIImage.animatedImage(with: warningArray, duration: 0.25)
-        warningView.frame = CGRect(x:xSpawn - (75/2), y: 0, width: 75, height: 75)
+        warningView.frame = CGRect(x: xSpawn - (75/2), y: 0, width: 75, height: 75)
         self.view.addSubview(warningView)
         
         let when = DispatchTime.now() + 2
@@ -160,19 +197,19 @@ class ViewController: UIViewController {
                 missileView.image = UIImage.animatedImage(with: self.missile2Array, duration: 0.25)
             }
             
-            missileView.frame = CGRect(x:xSpawn - (30/2), y: -100, width: 30, height: 90) //Spawn at y = -100 for the missile not to be visible.
+            missileView.frame = CGRect(x: xSpawn - (30/2), y: -100, width: 30, height: 90) //Spawn at y = -100 for the missile not to be visible.
             
             self.view.addSubview(missileView)
             
             self.dynamicAnimator.addBehavior(self.gravityBehavior)
             self.gravityBehavior.addItem(missileView)
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.9) {
                 self.score = self.score! + self.level! + self.bonus!
-                self.dodges = self.dodges! + 1
-                print("Armor: " + String(self.armor!) + " | Score: " + String(self.score!) + " | Avoided: " + String(self.dodges!) + " | Bonus: " + String(self.bonus!) + " | Level: " + self.onslaughtLevels[self.level!])
                 
-                if(self.gradual) {
+                self.detectCollision(missile: missileView)
+                
+                if(self.onslaught) {
                     switch self.level! {
                     case 0:
                         if(self.score! >= 10) {self.bonus! = self.bonus! + 1; self.armor! = self.armor! + 2; self.levelUp()}
@@ -197,6 +234,32 @@ class ViewController: UIViewController {
         }
     }
     
+    func detectCollision (missile: UIImageView) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
+            if (missile.frame.intersects(self.planeImg.frame)) {
+                self.armor = self.armor! - 1
+                if(self.onslaught) {
+                    self.updateStats()
+                }
+                
+                if(self.armor < 1) {
+                    self.gameOver()
+                } else {
+                    self.handleMissileHit()
+                }
+            } else {
+                if(missile.center.y > self.screenSize.maxY && self.gameInPlay) {
+                    self.dodges = self.dodges! + 1
+                    if(self.onslaught) {
+                        self.updateStats()
+                    }
+                } else if(self.gameInPlay) {
+                    self.detectCollision(missile: missile)
+                }
+            }
+        }
+    }
+    
     func levelUp() {
         self.level = self.level! + 1
     }
@@ -206,10 +269,7 @@ class ViewController: UIViewController {
     }
     
     func displayMenu() {
-        createMainScreen()
-    }
-    
-    func createMainScreen() {
+        loadDefaults()
         mainMenuBackground = UIImageView(image: nil)
         mainMenuBackground.image = UIImage(named: "screenMain.png")
         mainMenuBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width + 1, height: self.screenSize.height + 1)
@@ -249,15 +309,117 @@ class ViewController: UIViewController {
     }
     
     @objc func buttonTapped(_ button: UIButton) {
-        playButtonAction(sender: button)
+        playButtonAction()
     }
     
-    func playButtonAction(sender: UIButton!) {
+    @objc func mainMenuButtonTapped(_ button: UIButton) {
+        mainMenuButtonAction()
+    }
+    
+    func mainMenuButtonAction() {
+        if(endGameTextField != nil) {
+            endGameTextField.isHidden = true
+        }
+        if(endGameButton != nil) {
+            endGameButton.isHidden = true
+        }
+        if(endMenuGameOverBackground != nil) {
+            endMenuGameOverBackground.isHidden = true
+        }
+        if(endMenuTimeUpBackground != nil) {
+            endMenuTimeUpBackground.isHidden = true
+        }
+        displayMenu()
+    }
+    
+    func playButtonAction() {
         parseGameAttributes()
         hideMenu()
         loadGame(plane: self.aircraftType, level: self.level)
         self.gameInPlay = true;
         startLaunch(level: self.level)
+    }
+    
+    func updateStats() {
+        let statsA = "Armor: " + String(self.armor!) + " | Score: " + String(self.score!) + " | Avoided: " + String(self.dodges!)
+        let statsB = "Bonus: " + String(self.bonus!) + " | Level: " + self.onslaughtLevels[self.level!]
+        self.gameTextFieldA.text = statsA
+        self.gameTextFieldB.text = statsB
+    }
+    
+    func handleMissileHit() {
+        let explosionView = UIImageView(image: nil)
+        explosionView.image = UIImage.animatedImage(with: explosionArray, duration: 0.5)
+        explosionView.isHidden = false
+        explosionView.frame = CGRect(x: self.planeImg.center.x, y: self.planeImg.center.y, width: 50, height: 50)
+        explosionView.center = CGPoint(x: self.planeImg.center.x, y: self.planeImg.center.y)
+        self.view.addSubview(explosionView)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            explosionView.isHidden = true
+        }
+    }
+    
+    func playGameOverExplosion() {
+        let explosionView = UIImageView(image: nil)
+        explosionView.image = UIImage.animatedImage(with: explosionArray, duration: 1.5)
+        explosionView.isHidden = false
+        explosionView.frame = CGRect(x: self.planeImg.center.x, y: self.planeImg.center.y, width: 200, height: 200)
+        explosionView.center = CGPoint(x: self.planeImg.center.x, y: self.planeImg.center.y)
+        self.view.addSubview(explosionView)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            explosionView.isHidden = true
+        }
+        
+        self.planeImg.isHidden = true
+    }
+    
+    func gameOver() {
+        self.gameInPlay = false
+        playGameOverExplosion()
+        self.backgroundImg.stopAnimating()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+            self.displayGameOverScreen()
+        }
+    }
+    
+    func displayGameOverScreen() {
+        endMenuGameOverBackground = UIImageView(image: nil)
+        endMenuGameOverBackground.image = UIImage(named: "screenGameOver.png")
+        endMenuGameOverBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width + 1, height: self.screenSize.height + 1)
+        self.endMenuGameOverBackground.isHidden = false
+        
+        self.view.addSubview(endMenuGameOverBackground)
+        
+        //Display Score
+        
+        endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2) - 60, y: (self.screenSize.height * 0.95) - 15, width: 200, height: 30))
+        endGameButton.backgroundColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        endGameButton.setTitle("Back to main menu!", for: UIControlState.normal)
+        endGameButton.addTarget(self, action: #selector(self.mainMenuButtonTapped(_:)), for: .touchDown)
+        
+        self.endGameButton.isHidden = false
+        self.view.addSubview(endGameButton)
+    }
+    
+    func displayTimeUpScreen() {
+        endMenuTimeUpBackground = UIImageView(image: nil)
+        endMenuTimeUpBackground.image = UIImage(named: "screenGameOver.png")
+        endMenuTimeUpBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width + 1, height: self.screenSize.height + 1)
+        self.endMenuTimeUpBackground.isHidden = false
+        
+        self.view.addSubview(endMenuTimeUpBackground)
+        
+        //Display Score
+        
+        endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2) - 60, y: (self.screenSize.height * 0.95) - 15, width: 200, height: 30))
+        endGameButton.backgroundColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        endGameButton.setTitle("Back to main menu!", for: UIControlState.normal)
+        endGameButton.addTarget(self, action: #selector(self.mainMenuButtonTapped(_:)), for: .touchDown)
+        
+        self.endGameButton.isHidden = false
+        self.view.addSubview(endGameButton)
     }
     
     func parseGameAttributes() {
@@ -266,7 +428,7 @@ class ViewController: UIViewController {
             self.level = self.levelSelector.selectedSegmentIndex
         } else {
             self.level = 0
-            self.gradual = true
+            self.onslaught = true
         }
     }
     
