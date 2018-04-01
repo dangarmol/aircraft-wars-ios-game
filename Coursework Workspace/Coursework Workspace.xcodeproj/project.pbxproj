@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6585500C206FE9E800D3E764 /* screenTimeUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6585500B206FE9E700D3E764 /* screenTimeUp.png */; };
 		65958E302052DA43005CBF6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65958E2F2052DA43005CBF6C /* AppDelegate.swift */; };
 		65958E322052DA43005CBF6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65958E312052DA43005CBF6C /* ViewController.swift */; };
 		65958E352052DA43005CBF6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65958E332052DA43005CBF6C /* Main.storyboard */; };
@@ -124,6 +125,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6585500B206FE9E700D3E764 /* screenTimeUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenTimeUp.png; sourceTree = "<group>"; };
 		65958E2C2052DA42005CBF6C /* Coursework Workspace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coursework Workspace.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65958E2F2052DA43005CBF6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65958E312052DA43005CBF6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		65958E2E2052DA42005CBF6C /* Coursework Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				6585500B206FE9E700D3E764 /* screenTimeUp.png */,
 				65FB7F92206D20CF0080A548 /* screenGameOver.png */,
 				65FB7F93206D20CF0080A548 /* screenMain.png */,
 				65F3112E206A942B00B976D1 /* aircraftF-A-28Aa.png */,
@@ -561,6 +564,7 @@
 				65F31102206A602F00B976D1 /* clouds51.png in Resources */,
 				65F310F2206A602E00B976D1 /* clouds48.png in Resources */,
 				65F310F4206A602E00B976D1 /* clouds20.png in Resources */,
+				6585500C206FE9E800D3E764 /* screenTimeUp.png in Resources */,
 				65F3111F206A602F00B976D1 /* explosion1l.png in Resources */,
 				65F310E2206A602E00B976D1 /* clouds12.png in Resources */,
 				65F3111D206A602F00B976D1 /* clouds39.png in Resources */,

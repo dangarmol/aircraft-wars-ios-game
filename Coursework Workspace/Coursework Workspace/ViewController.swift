@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     var gameTextFieldA: UITextField!
     var gameTextFieldB: UITextField!
     
+    var screenTimer: UITextField!
+    
     var endGameTextField: UITextField!
     
     var dynamicAnimator: UIDynamicAnimator!
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
     var score: Int!
     var dodges: Int!
     var armor: Int!
+    var time: Int!
     
     var backgroundArray: [UIImage] = [UIImage(named: "clouds01.png")!, UIImage(named: "clouds02.png")!, UIImage(named: "clouds03.png")!, UIImage(named: "clouds04.png")!, UIImage(named: "clouds05.png")!, UIImage(named: "clouds06.png")!, UIImage(named: "clouds07.png")!, UIImage(named: "clouds08.png")!, UIImage(named: "clouds09.png")!, UIImage(named: "clouds10.png")!, UIImage(named: "clouds11.png")!, UIImage(named: "clouds12.png")!, UIImage(named: "clouds13.png")!, UIImage(named: "clouds14.png")!, UIImage(named: "clouds15.png")!, UIImage(named: "clouds16.png")!, UIImage(named: "clouds17.png")!, UIImage(named: "clouds18.png")!, UIImage(named: "clouds19.png")!, UIImage(named: "clouds20.png")!, UIImage(named: "clouds21.png")!, UIImage(named: "clouds22.png")!, UIImage(named: "clouds23.png")!, UIImage(named: "clouds24.png")!, UIImage(named: "clouds25.png")!, UIImage(named: "clouds26.png")!, UIImage(named: "clouds27.png")!, UIImage(named: "clouds28.png")!, UIImage(named: "clouds29.png")!, UIImage(named: "clouds30.png")!, UIImage(named: "clouds31.png")!, UIImage(named: "clouds32.png")!, UIImage(named: "clouds33.png")!, UIImage(named: "clouds34.png")!, UIImage(named: "clouds35.png")!, UIImage(named: "clouds36.png")!, UIImage(named: "clouds37.png")!, UIImage(named: "clouds38.png")!, UIImage(named: "clouds39.png")!, UIImage(named: "clouds40.png")!, UIImage(named: "clouds41.png")!, UIImage(named: "clouds42.png")!, UIImage(named: "clouds43.png")!, UIImage(named: "clouds44.png")!, UIImage(named: "clouds45.png")!, UIImage(named: "clouds46.png")!, UIImage(named: "clouds47.png")!, UIImage(named: "clouds48.png")!, UIImage(named: "clouds49.png")!, UIImage(named: "clouds50.png")!, UIImage(named: "clouds51.png")!, UIImage(named: "clouds52.png")!, UIImage(named: "clouds53.png")!]
     
@@ -84,6 +87,7 @@ class ViewController: UIViewController {
         self.bonus = 1
         self.dodges = 0
         self.armor = 1
+        self.time = 20
         if(self.gameTextFieldA != nil && self.gameTextFieldB != nil) {
             self.gameTextFieldA.text = ""
             self.gameTextFieldB.text = ""
@@ -132,6 +136,16 @@ class ViewController: UIViewController {
         if(self.onslaught) {
             gameTextFieldA.text = "Armor: " + String(self.armor!) + " | Score: " + String(self.score!) + " | Avoided: " + String(self.dodges!)
             gameTextFieldB.text = "Bonus: " + String(self.bonus!) + " | Level: " + self.onslaughtLevels[self.level!]
+        } else {
+            if(screenTimer == nil) {
+                screenTimer = UITextField()
+                screenTimer.frame = CGRect(x: 0, y: screenSize.height * 0.95, width: screenSize.width, height: 40)
+                self.screenTimer.isHidden = false
+                screenTimer.textAlignment = .center
+                self.view.addSubview(screenTimer)
+            } else {
+                self.screenTimer.isHidden = false
+            }
         }
             
         planeImg.image = UIImage.animatedImage(with: planeImage, duration: 0.25)
@@ -234,7 +248,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func detectCollision (missile: UIImageView) {
+    func detectCollision(missile: UIImageView) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
             if (missile.frame.intersects(self.planeImg.frame)) {
                 self.armor = self.armor! - 1
@@ -243,7 +257,7 @@ class ViewController: UIViewController {
                 }
                 
                 if(self.armor < 1) {
-                    self.gameOver()
+                    self.handleGameOver()
                 } else {
                     self.handleMissileHit()
                 }
@@ -337,6 +351,7 @@ class ViewController: UIViewController {
         hideMenu()
         loadGame(plane: self.aircraftType, level: self.level)
         self.gameInPlay = true;
+        startTimer()
         startLaunch(level: self.level)
     }
     
@@ -375,12 +390,63 @@ class ViewController: UIViewController {
         self.planeImg.isHidden = true
     }
     
-    func gameOver() {
+    func startTimer() {
+        if(gameInPlay) {
+            self.time = self.time! - 1
+            if(self.time! >= 10) {
+                self.screenTimer.text = "00:" + String(self.time!)
+            } else {
+                self.screenTimer.text = "00:0" + String(self.time!)
+            }
+            
+            if(self.time <= 0) {
+                handleTimeUp()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    self.startTimer()
+                }
+            }
+        }
+    }
+    
+    func handleGameOver() {
         self.gameInPlay = false
         playGameOverExplosion()
         self.backgroundImg.stopAnimating()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             self.displayGameOverScreen()
+        }
+    }
+    
+    func handleTimeUp() {
+        self.gameInPlay = false
+        self.backgroundImg.stopAnimating()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
+            self.displayTimeUpScreen()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
+            self.screenTimer.textColor = UIColor.red
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            self.screenTimer.textColor = UIColor.red
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.screenTimer.textColor = UIColor.red
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            self.screenTimer.textColor = UIColor.red
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            self.screenTimer.textColor = UIColor.black
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            self.screenTimer.textColor = UIColor.black
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.5) {
+            self.screenTimer.textColor = UIColor.black
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.5) {
+            self.screenTimer.textColor = UIColor.black
         }
     }
     
@@ -394,8 +460,9 @@ class ViewController: UIViewController {
         
         //Display Score
         
-        endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2) - 60, y: (self.screenSize.height * 0.95) - 15, width: 200, height: 30))
-        endGameButton.backgroundColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2), y: (self.screenSize.height * 0.95), width: 200, height: 30))
+        endGameButton.center = CGPoint(x: (self.screenSize.width * 0.75), y: (self.screenSize.height * 0.05))
+        endGameButton.backgroundColor = UIColor.blue
         endGameButton.setTitle("Back to main menu!", for: UIControlState.normal)
         endGameButton.addTarget(self, action: #selector(self.mainMenuButtonTapped(_:)), for: .touchDown)
         
@@ -413,8 +480,9 @@ class ViewController: UIViewController {
         
         //Display Score
         
-        endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2) - 60, y: (self.screenSize.height * 0.95) - 15, width: 200, height: 30))
-        endGameButton.backgroundColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
+        endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2), y: (self.screenSize.height * 0.95), width: 200, height: 30))
+        endGameButton.center = CGPoint(x: (self.screenSize.width * 0.75), y: (self.screenSize.height * 0.05))
+        endGameButton.backgroundColor = UIColor.blue
         endGameButton.setTitle("Back to main menu!", for: UIControlState.normal)
         endGameButton.addTarget(self, action: #selector(self.mainMenuButtonTapped(_:)), for: .touchDown)
         
