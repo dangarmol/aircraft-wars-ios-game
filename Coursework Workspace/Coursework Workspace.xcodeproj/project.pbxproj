@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6585500C206FE9E800D3E764 /* screenTimeUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 6585500B206FE9E700D3E764 /* screenTimeUp.png */; };
+		6585501020713CE500D3E764 /* soundStaticJet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6585500D20713CE400D3E764 /* soundStaticJet.mp3 */; };
+		6585501120713CE500D3E764 /* soundFinalExplosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6585500E20713CE500D3E764 /* soundFinalExplosion.mp3 */; };
+		6585501220713CE500D3E764 /* soundHit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6585500F20713CE500D3E764 /* soundHit.mp3 */; };
 		65958E302052DA43005CBF6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65958E2F2052DA43005CBF6C /* AppDelegate.swift */; };
 		65958E322052DA43005CBF6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65958E312052DA43005CBF6C /* ViewController.swift */; };
 		65958E352052DA43005CBF6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65958E332052DA43005CBF6C /* Main.storyboard */; };
@@ -126,6 +129,9 @@
 
 /* Begin PBXFileReference section */
 		6585500B206FE9E700D3E764 /* screenTimeUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenTimeUp.png; sourceTree = "<group>"; };
+		6585500D20713CE400D3E764 /* soundStaticJet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundStaticJet.mp3; sourceTree = "<group>"; };
+		6585500E20713CE500D3E764 /* soundFinalExplosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundFinalExplosion.mp3; sourceTree = "<group>"; };
+		6585500F20713CE500D3E764 /* soundHit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundHit.mp3; sourceTree = "<group>"; };
 		65958E2C2052DA42005CBF6C /* Coursework Workspace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coursework Workspace.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65958E2F2052DA43005CBF6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65958E312052DA43005CBF6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +285,9 @@
 		65958E2E2052DA42005CBF6C /* Coursework Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				6585500E20713CE500D3E764 /* soundFinalExplosion.mp3 */,
+				6585500F20713CE500D3E764 /* soundHit.mp3 */,
+				6585500D20713CE400D3E764 /* soundStaticJet.mp3 */,
 				6585500B206FE9E700D3E764 /* screenTimeUp.png */,
 				65FB7F92206D20CF0080A548 /* screenGameOver.png */,
 				65FB7F93206D20CF0080A548 /* screenMain.png */,
@@ -519,10 +528,12 @@
 				65F31120206A602F00B976D1 /* clouds23.png in Resources */,
 				65F310F6206A602E00B976D1 /* clouds22.png in Resources */,
 				65F31138206A942D00B976D1 /* aircraftMiG-51b.png in Resources */,
+				6585501120713CE500D3E764 /* soundFinalExplosion.mp3 in Resources */,
 				65958E372052DA43005CBF6C /* Assets.xcassets in Resources */,
 				65F31101206A602F00B976D1 /* explosion1i.png in Resources */,
 				65F310FD206A602E00B976D1 /* explosion1f.png in Resources */,
 				65F310EC206A602E00B976D1 /* clouds05.png in Resources */,
+				6585501020713CE500D3E764 /* soundStaticJet.mp3 in Resources */,
 				65F31122206A602F00B976D1 /* explosion1j.png in Resources */,
 				65F31118206A602F00B976D1 /* aircraftSU-37K.png in Resources */,
 				65F31126206A602F00B976D1 /* missile1b.png in Resources */,
@@ -559,6 +570,7 @@
 				65F3110F206A602F00B976D1 /* aircraftMiG-51.png in Resources */,
 				65F3112C206A602F00B976D1 /* clouds29.png in Resources */,
 				65F31110206A602F00B976D1 /* clouds11.png in Resources */,
+				6585501220713CE500D3E764 /* soundHit.mp3 in Resources */,
 				65F31125206A602F00B976D1 /* clouds50.png in Resources */,
 				65F3112A206A602F00B976D1 /* clouds34.png in Resources */,
 				65F31102206A602F00B976D1 /* clouds51.png in Resources */,

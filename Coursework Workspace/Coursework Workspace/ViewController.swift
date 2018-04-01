@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -19,7 +20,12 @@ class ViewController: UIViewController {
     
     var screenTimer: UITextField!
     
-    var endGameTextField: UITextField!
+    var endGameTextFieldA: UITextField!
+    var endGameTextFieldB: UITextField!
+    
+    var hitAudioPlayer: AVAudioPlayer?
+    var gameOverAudioPlayer: AVAudioPlayer?
+    var staticAudioPlayer: AVAudioPlayer?
     
     var dynamicAnimator: UIDynamicAnimator!
     var gravityBehavior: UIGravityBehavior!
@@ -154,6 +160,8 @@ class ViewController: UIViewController {
         self.dynamicAnimator = UIDynamicAnimator(referenceView: self.view) //Starts the dynamicAnimator used for missiles
         self.gravityBehavior = UIGravityBehavior()
         self.gravityBehavior.magnitude = 1
+        
+        playStaticSound()
     }
     
     func fireMissiles(interval: Double) {
@@ -316,13 +324,13 @@ class ViewController: UIViewController {
         startButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2) - 60, y: (self.screenSize.height * 0.95) - 15, width: 120, height: 30))
         startButton.backgroundColor = UIColor(red:75/255.0, green:83/255.0, blue:32/255.0, alpha:1)
         startButton.setTitle("Start Game!", for: UIControlState.normal)
-        startButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchDown)
+        startButton.addTarget(self, action: #selector(self.startButtonTapped(_:)), for: .touchDown)
         
         self.startButton.isHidden = false
         self.view.addSubview(startButton)
     }
     
-    @objc func buttonTapped(_ button: UIButton) {
+    @objc func startButtonTapped(_ button: UIButton) {
         playButtonAction()
     }
     
@@ -331,9 +339,6 @@ class ViewController: UIViewController {
     }
     
     func mainMenuButtonAction() {
-        if(endGameTextField != nil) {
-            endGameTextField.isHidden = true
-        }
         if(endGameButton != nil) {
             endGameButton.isHidden = true
         }
@@ -343,6 +348,12 @@ class ViewController: UIViewController {
         if(endMenuTimeUpBackground != nil) {
             endMenuTimeUpBackground.isHidden = true
         }
+        if(endGameTextFieldA != nil) {
+            endGameTextFieldA.isHidden = true
+        }
+        if(endGameTextFieldB != nil) {
+            endGameTextFieldB.isHidden = true
+        }
         displayMenu()
     }
     
@@ -351,7 +362,9 @@ class ViewController: UIViewController {
         hideMenu()
         loadGame(plane: self.aircraftType, level: self.level)
         self.gameInPlay = true;
-        startTimer()
+        if(!self.onslaught) {
+            startTimer()
+        }
         startLaunch(level: self.level)
     }
     
@@ -369,6 +382,8 @@ class ViewController: UIViewController {
         explosionView.frame = CGRect(x: self.planeImg.center.x, y: self.planeImg.center.y, width: 50, height: 50)
         explosionView.center = CGPoint(x: self.planeImg.center.x, y: self.planeImg.center.y)
         self.view.addSubview(explosionView)
+        
+        playHitSound()
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             explosionView.isHidden = true
@@ -412,9 +427,13 @@ class ViewController: UIViewController {
     func handleGameOver() {
         self.gameInPlay = false
         playGameOverExplosion()
+        playGameOverSound()
         self.backgroundImg.stopAnimating()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             self.displayGameOverScreen()
+            if(!self.onslaught) {
+                self.screenTimer.isHidden = true
+            }
         }
     }
     
@@ -454,11 +473,53 @@ class ViewController: UIViewController {
         endMenuGameOverBackground = UIImageView(image: nil)
         endMenuGameOverBackground.image = UIImage(named: "screenGameOver.png")
         endMenuGameOverBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width + 1, height: self.screenSize.height + 1)
-        self.endMenuGameOverBackground.isHidden = false
+        endMenuGameOverBackground.isHidden = false
         
         self.view.addSubview(endMenuGameOverBackground)
         
-        //Display Score
+        if(endGameTextFieldA == nil) {
+            endGameTextFieldA = UITextField()
+            endGameTextFieldA.frame = CGRect(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.6, width: self.screenSize.width, height: 40)
+            endGameTextFieldA.center = CGPoint(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.8)
+            endGameTextFieldA.textColor = UIColor.yellow
+            endGameTextFieldA.backgroundColor = UIColor.black
+            endGameTextFieldA.textAlignment = .center
+        } else {
+            endGameTextFieldA.textColor = UIColor.yellow
+            endGameTextFieldA.backgroundColor = UIColor.black
+            endGameTextFieldA.text = ""
+        }
+        if(self.onslaught) {
+            endGameTextFieldA.textColor = UIColor.cyan
+            endGameTextFieldA.text = "Nice job!!!"
+        } else {
+            endGameTextFieldA.textColor = UIColor.orange
+            endGameTextFieldA.text = "You crashed before the end of the timer!"
+        }
+        endGameTextFieldA.isHidden = false
+        self.view.addSubview(endGameTextFieldA)
+        
+        if(endGameTextFieldB == nil) {
+            endGameTextFieldB = UITextField()
+            endGameTextFieldB.frame = CGRect(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.6, width: self.screenSize.width, height: 40)
+            endGameTextFieldB.center = CGPoint(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.85)
+            endGameTextFieldB.textColor = UIColor.yellow
+            endGameTextFieldB.backgroundColor = UIColor.black
+            endGameTextFieldB.textAlignment = .center
+        } else {
+            endGameTextFieldB.textColor = UIColor.yellow
+            endGameTextFieldB.backgroundColor = UIColor.black
+            endGameTextFieldB.text = ""
+        }
+        if(self.onslaught) {
+            endGameTextFieldB.textColor = UIColor.yellow
+            endGameTextFieldB.text = "Your final score was " + String(self.score!) + " points"
+        } else {
+            endGameTextFieldB.textColor = UIColor.red
+            endGameTextFieldB.text = "Keep training and play Onslaught mode later!"
+        }
+        endGameTextFieldB.isHidden = false
+        self.view.addSubview(endGameTextFieldB)
         
         endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2), y: (self.screenSize.height * 0.95), width: 200, height: 30))
         endGameButton.center = CGPoint(x: (self.screenSize.width * 0.75), y: (self.screenSize.height * 0.05))
@@ -478,7 +539,39 @@ class ViewController: UIViewController {
         
         self.view.addSubview(endMenuTimeUpBackground)
         
-        //Display Score
+        if(endGameTextFieldA == nil) {
+            endGameTextFieldA = UITextField()
+            endGameTextFieldA.frame = CGRect(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.6, width: self.screenSize.width, height: 40)
+            endGameTextFieldA.center = CGPoint(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.8)
+            endGameTextFieldA.textColor = UIColor.yellow
+            endGameTextFieldA.backgroundColor = UIColor.black
+            endGameTextFieldA.textAlignment = .center
+        } else {
+            endGameTextFieldA.textColor = UIColor.yellow
+            endGameTextFieldA.backgroundColor = UIColor.black
+            endGameTextFieldA.text = ""
+        }
+        endGameTextFieldA.textColor = UIColor.cyan
+        endGameTextFieldA.text = "Good job! You completed the 20 second training!"
+        endGameTextFieldA.isHidden = false
+        self.view.addSubview(endGameTextFieldA)
+        
+        if(endGameTextFieldB == nil) {
+            endGameTextFieldB = UITextField()
+            endGameTextFieldB.frame = CGRect(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.6, width: self.screenSize.width, height: 40)
+            endGameTextFieldB.center = CGPoint(x: self.screenSize.width * 0.5, y: self.screenSize.height * 0.85)
+            endGameTextFieldB.textColor = UIColor.green
+            endGameTextFieldB.backgroundColor = UIColor.black
+            endGameTextFieldB.textAlignment = .center
+        } else {
+            endGameTextFieldB.textColor = UIColor.green
+            endGameTextFieldB.backgroundColor = UIColor.black
+            endGameTextFieldB.text = ""
+        }
+        endGameTextFieldB.textColor = UIColor.green
+        endGameTextFieldB.text = "Now try Onslaught mode for the full experience!"
+        endGameTextFieldB.isHidden = false
+        self.view.addSubview(endGameTextFieldB)
         
         endGameButton = UIButton(frame: CGRect(x: (self.screenSize.width / 2), y: (self.screenSize.height * 0.95), width: 200, height: 30))
         endGameButton.center = CGPoint(x: (self.screenSize.width * 0.75), y: (self.screenSize.height * 0.05))
@@ -488,6 +581,75 @@ class ViewController: UIViewController {
         
         self.endGameButton.isHidden = false
         self.view.addSubview(endGameButton)
+    }
+    
+    func playGameOverSound() {
+        guard let url = Bundle.main.url(forResource: "soundFinalExplosion", withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            gameOverAudioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let gameOverAudioPlayer = gameOverAudioPlayer else { return }
+            
+            gameOverAudioPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func playHitSound() {
+        guard let url = Bundle.main.url(forResource: "soundHit", withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            hitAudioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let hitAudioPlayer = hitAudioPlayer else { return }
+            
+            hitAudioPlayer.play()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.playStaticSound()
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func playStaticSound() {
+        guard let url = Bundle.main.url(forResource: "soundStaticJet", withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            staticAudioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let staticAudioPlayer = staticAudioPlayer else { return }
+            
+            staticAudioPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     func parseGameAttributes() {
