@@ -442,6 +442,9 @@ class ViewController: UIViewController {
         self.backgroundImg.stopAnimating()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             self.displayTimeUpScreen()
+            if(!self.onslaught) {
+                self.screenTimer.isHidden = true
+            }
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
             self.screenTimer.textColor = UIColor.red
