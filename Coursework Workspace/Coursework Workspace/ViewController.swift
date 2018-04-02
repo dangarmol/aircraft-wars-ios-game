@@ -227,7 +227,9 @@ class ViewController: UIViewController {
             self.gravityBehavior.addItem(missileView)
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.9) {
-                self.score = self.score! + self.level! + self.bonus!
+                if(self.gameInPlay) {
+                    self.score = self.score! + self.level! + self.bonus!
+                }
                 
                 self.detectCollision(missile: missileView)
                 
@@ -260,7 +262,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
             if (missile.frame.intersects(self.planeImg.frame)) {
                 self.armor = self.armor! - 1
-                if(self.onslaught) {
+                if(self.onslaught && self.gameInPlay) {
                     self.updateStats()
                 }
                 
@@ -272,7 +274,7 @@ class ViewController: UIViewController {
             } else {
                 if(missile.center.y > self.screenSize.maxY && self.gameInPlay) {
                     self.dodges = self.dodges! + 1
-                    if(self.onslaught) {
+                    if(self.onslaught && self.gameInPlay) {
                         self.updateStats()
                     }
                 } else if(self.gameInPlay) {
@@ -536,7 +538,7 @@ class ViewController: UIViewController {
     
     func displayTimeUpScreen() {
         endMenuTimeUpBackground = UIImageView(image: nil)
-        endMenuTimeUpBackground.image = UIImage(named: "screenGameOver.png")
+        endMenuTimeUpBackground.image = UIImage(named: "screenTimeUp.png")
         endMenuTimeUpBackground.frame = CGRect(x: 0, y: 0, width: self.screenSize.width + 1, height: self.screenSize.height + 1)
         self.endMenuTimeUpBackground.isHidden = false
         
