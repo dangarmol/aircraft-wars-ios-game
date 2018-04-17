@@ -1,0 +1,1 @@
+The game DOES have sounds. However, due to the inability of QuickTime Player to record sounds natively (only through use of Third Party plugins to display system audio as an audio input), the demo video doesn't have sound.
